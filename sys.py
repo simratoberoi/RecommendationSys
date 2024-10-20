@@ -5,7 +5,7 @@ users_data = {
     'user4': {'gender': 'female', 'age': 24, 'night_owl': False, 'food': 'non-veg'},
 }
 
-def get_user_preferences():
+def preferences():
     gender = input("What is your gender? (male/female/other): ").lower()
     age = int(input("What is your age?: "))
     night_owl = input("Are you a night owl? (yes/no): ").lower() == 'yes'
@@ -13,7 +13,7 @@ def get_user_preferences():
 
     return {'gender': gender, 'age': age, 'night_owl': night_owl, 'food': food}
 
-def score_match(user_pref, candidate_pref):
+def score(user_pref, candidate_pref):
     score = 0
     if user_pref['gender'] == candidate_pref['gender']:
         score += 10
@@ -26,11 +26,11 @@ def score_match(user_pref, candidate_pref):
         score += 5
     return score
 
-def recommend_roommate(user_pref, users_data):
+def recommend(user_pref, users_data):
     best_match = None
     best_score = -1
     for username, candidate_pref in users_data.items():
-        score = score_match(user_pref, candidate_pref)
+        score = score(user_pref, candidate_pref)
         print(f"Score for {username}: {score}")
         if score > best_score:
             best_score = score
@@ -40,7 +40,7 @@ def recommend_roommate(user_pref, users_data):
 
 if __name__ == "__main__":
     print("Let's find the best roommate match for you!")
-    user_pref = get_user_preferences()
-    best_match, best_score = recommend_roommate(user_pref, users_data)
+    user_pref = preferences()
+    best_match, best_score = recommend(user_pref, users_data)
 
     print(f"\nYour best roommate match is {best_match} with a score of {best_score}!")
